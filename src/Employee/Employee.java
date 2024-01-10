@@ -9,18 +9,19 @@ public class Employee {
 	public String nama;
 	public String location;
 	public String restoType;
+	
 	public void show_employee(Query query) {
 	    try {
-	        ResultSet rs = query.select("employees", "true");
+	        ResultSet rs = query.select("msemployee", "true");
 
 	        if (rs != null) {
 	            while (rs.next()) {
-	                System.out.printf("Employee_id : %s\n" +
+	                System.out.printf("employeeId : %s\n" +
 	                                  "Name: %s \n" +
 	                                  "Location: %s\n\n",
-	                                  rs.getString("employee_id"),
+	                                  rs.getString("employeeId"),
 	                                  rs.getString("name"),
-	                                  rs.getString("location"));
+	                                  rs.getString("place"));
 	            }
 	            rs.close();
 	        } else {
@@ -31,16 +32,16 @@ public class Employee {
 	    }
 	}
 	
-	public boolean check_data(Integer id, Query query) {
+	public Boolean check_data(Integer id, Query query) {
 	    try {
-	        ResultSet rs = query.select("employees", "employee_id = " + id);
+	        ResultSet rs = query.select("msemployee", "employeeId = " + id);
 	        int count = 0;
 
 	        while (rs.next()) {
 	            count++;
 	            this.id = id;
 	            this.nama = rs.getString("name");
-	            this.location = rs.getString("location");
+	            this.location = rs.getString("place");
 
 	            if (this.location.equals("Bandung") || this.location.equals("Jakarta") || this.location.equals("Bali")) {
 	                this.restoType = "Special";
@@ -56,6 +57,27 @@ public class Employee {
 	        return false;
 	    }
 	}
+	
+	public Employee(Query query) {
+    	System.out.println("Choparang exists");
+    	Scanner scanner = new Scanner(System.in);
+        System.out.println();
+        System.out.println("-----Employee-----");
+        show_employee(query);
+        while(true) {
+        	System.out.println("Insert your employee id:");
+            Integer id = scanner.nextInt(); 
+            scanner.nextLine();
+           
+            if(check_data(id, query).equals(true)) {
+            	System.out.println("Employee id enter succesfully");
+            	break;
+            }
+            System.out.println("Unknown employee id. Please re-input");
+        }
+        
+        return;
+    }
 
 
 

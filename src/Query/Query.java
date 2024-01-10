@@ -99,9 +99,9 @@ public class Query {
 		// from table orders join table menus, display menu name, menu price, menu quantity, menu_price*quantity
 		try {
 	        Statement stmt = conn.createStatement();
-	        rs = stmt.executeQuery("select nama_makanan, price, quantity, price*quantity AS `total_price` "
-	        		+ " from "+ "orders as o join menus as m ON m.menu_id = o.menu_id"
-	        		+ " where transaction_id = " + targetId);
+	        rs = stmt.executeQuery("select foodname, price, quantity, price*quantity AS `total_price` "
+	        		+ " from "+ "msorders as o join msmenu as m ON m.menuId = o.menuId"
+	        		+ " where transactionId = " + targetId);
 	        
 	    } catch (Exception e) {
 	        e.printStackTrace();
@@ -113,7 +113,7 @@ public class Query {
 	public Query() {
 		try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/akhiroop", "root", "");
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/restomanagements", "root", "");
            
             if (conn != null) {
                 System.out.println("Connection established!");

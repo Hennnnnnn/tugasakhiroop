@@ -1,12 +1,18 @@
 package Main;
 
 import java.util.*;
-
+import Menu.Menu;
+import Employee.Employee;
 import Query.Query;
+import Query.newTransaction;
+import Query.updateTransaction;
 
 public class Main {
 	Scanner scanner = new Scanner(System.in);
-
+	Menu menu = new Menu();
+	newTransaction newTransaction = new newTransaction();
+	updateTransaction updateTransaction = new updateTransaction();
+	
 	public static void main(String[] args) {
 		Query q = new Query();
 		new Main(q);
@@ -14,6 +20,7 @@ public class Main {
 	}
 	
 	public Main(Query q) {
+		Employee employee = new Employee(q);
 		while(true) {
 			System.out.println();
             System.out.println("-----do something-----");
@@ -28,28 +35,29 @@ public class Main {
             
             switch (inp) {
 	            case 1:
-	                menu.add_menu(query, employee);
+	                menu.addMenu(q, employee);
 	                break;
 	            case 2:
-	                menu.update_menu(query, employee);
+	                menu.updateMenu(q, employee);
 	                break;
 	            case 3:
-	                menu.delete_menu(query, employee);
+	                menu.deleteMenu(q, employee);
 	                break;
 	            case 4:
-	                new_transaction.make_reservation(query, employee);
+	            	newTransaction.makeReservation(q, employee);
 	                break;
 	            case 5:
-	                update_transaction.update(query, employee);
+	            	updateTransaction.update(q, employee);
 	                break;
 	            case 6:
-	                System.out.println("Arigatouu~~");
+	                System.out.println("Thanks");
 	                System.exit(0);
 	                break;
 	            default:
-                // Handle invalid input
 	            	System.out.println("Invalid input!");
 	            	break;
+            	}
+		
+			}
 		}
-	}
 }
