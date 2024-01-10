@@ -51,12 +51,13 @@ public class newTransaction {
                         while (res.next()) {
                             transactionId = res.getInt("transactionId");
                         }
-                    } catch (SQLException ex) {
-                        ex.printStackTrace();
+                    } catch (SQLException e) {
+                        e.printStackTrace();
                     }
 
-                    query.insert("tableinfo", "(`transactionId`, `typeofTabel`, `tableCapacity`)",
+                    query.insert("tables", "(`transactionId`, `typeofTabel`, `tableCapacity`)",
                             "(" + transactionId + ", '" + table.tableType + "', " + table.numOfPeople + ")");
+
                     break;
                 }
             }

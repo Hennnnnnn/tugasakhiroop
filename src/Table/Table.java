@@ -8,30 +8,37 @@ public class Table {
 	public Integer numOfPeople;
 
 	public boolean checkTable(Query query) {
-	    ResultSet rs = query.select("tableinfo", "typeofTabel = '" + this.tableType + "'");
-	    boolean error = true;
+	    ResultSet rs = query.select("tableinfos", "typeofTabel = '" + this.tableType + "'");
+	    boolean error = false;
 
 	    try {
-	        if (rs.next()) {
-	            int tableCapacity = rs.getInt("tableCapacity");
-	            if (this.numOfPeople <= tableCapacity) {
-	                error = false;
-	            } else {
-	                System.out.println("The number of people exceeds table capacity (max. " + tableCapacity + ")");
-	            }
-	        } else {
+	        if (!rs.next()) {
 	            System.out.println("Unknown table type");
+	            error = true;
+	        } else {
+	            int tableCapacity = rs.getInt("tableCapacity");
+	            if (this.numOfPeople > tableCapacity) {
+	                System.out.println("The number of people exceeds table capacity (max. " + tableCapacity + ")");
+	                error = true;
+	            }
 	        }
 	    } catch (SQLException e) {
 	        error = true;
 	        e.printStackTrace();
+	    } finally {
+	        try {
+	            if (rs != null) {
+	                rs.close();
+	            }
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
 	    }
-
 	    return error;
 	}
 
 	public void showTable(Query query, Integer transactionId) {
-	    ResultSet rs = query.select("tableinfo", "transactionId = " + transactionId);
+	    ResultSet rs = query.select("tableinfos", "transactionId = " + transactionId);
 
 	    try {
 	        while (rs.next()) {
