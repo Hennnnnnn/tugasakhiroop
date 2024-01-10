@@ -9,7 +9,8 @@ public class Employee {
 	public String nama;
 	public String location;
 	public String restoType;
-	
+	Scanner scanner = new Scanner(System.in);
+
 	public void show_employee(Query query) {
 	    try {
 	        ResultSet rs = query.select("msemployee", "true");
@@ -60,7 +61,6 @@ public class Employee {
 	
 	public Employee(Query query) {
     	System.out.println("Choparang exists");
-    	Scanner scanner = new Scanner(System.in);
         System.out.println();
         System.out.println("-----Employee-----");
         show_employee(query);

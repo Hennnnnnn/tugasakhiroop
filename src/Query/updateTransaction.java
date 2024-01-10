@@ -37,7 +37,7 @@ public class updateTransaction {
 	    while (true) {
 	        System.out.printf("Transaction ID: ");
 	        transactionId = scan.nextInt();
-	        scan.nextLine(); // Consume the newline character
+	        scan.nextLine();
 
 	        ResultSet rs = query.select("transactions", "transactionId = " + transactionId);
 	        try {
@@ -64,7 +64,7 @@ public class updateTransaction {
 	    while (true) {
 	        System.out.printf("No. menu: ");
 	        int menuId = scan.nextInt();
-	        scan.nextLine(); // Consume the newline character
+	        scan.nextLine();
 
 	        if (menu.saveId.containsKey(menuId)) {
 	            menuId = menu.saveId.get(menuId);
@@ -75,7 +75,7 @@ public class updateTransaction {
 
 	        System.out.printf("Quantity: ");
 	        quantity = scan.nextInt();
-	        scan.nextLine(); // Consume the newline character
+	        scan.nextLine(); 
 
 	        ResultSet orderRs = query.select("msorders", "transactionId = " + transactionId + " and menuId = " + menuId);
 	        Integer newQuantity = 0;
@@ -110,7 +110,7 @@ public class updateTransaction {
 	public void finalize_order(Query query, Employee employee) {
 	    System.out.print("Input Transaction ID: ");
 	    Integer finalId = scan.nextInt();
-	    scan.nextLine(); // Consume the newline character
+	    scan.nextLine();
 
 	    ResultSet rs = query.select("transactions", "transactionId = " + finalId);
 	    Integer totalPrice = 0;
@@ -152,10 +152,8 @@ public class updateTransaction {
 	public void update(Query query, Employee employee) {
 	    System.out.println("== Update transaction ==");
 
-	    // Display all transactions initially
 	    viewAllTransactions(query);
 
-	    // Ask whether to take order or finalize
 	    int choice;
 	    do {
 	        System.out.println("1. Take order");
@@ -163,14 +161,13 @@ public class updateTransaction {
 	        System.out.print("Enter choice: ");
 	        choice = scan.nextInt();
 	        if (choice == 1 || choice == 2) {
-	            scan.nextLine(); // Consume the newline character
+	            scan.nextLine(); 
 	            break;
 	        }
 	        System.out.println("Unknown option, please re-enter\n");
 	    } while (true);
 	    System.out.println();
 
-	    // Handle the chosen action
 	    switch (choice) {
 	        case 1:
 	            take_order(query, employee);

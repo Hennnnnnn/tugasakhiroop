@@ -9,13 +9,13 @@ public class Table {
 
 	public boolean checkTable(Query query) {
 	    ResultSet rs = query.select("tableinfo", "typeofTabel = '" + this.tableType + "'");
-	    boolean error = true; // Set initial error state to true
+	    boolean error = true;
 
 	    try {
 	        if (rs.next()) {
 	            int tableCapacity = rs.getInt("tableCapacity");
 	            if (this.numOfPeople <= tableCapacity) {
-	                error = false; // No error when the number of people is within table capacity
+	                error = false;
 	            } else {
 	                System.out.println("The number of people exceeds table capacity (max. " + tableCapacity + ")");
 	            }
