@@ -16,7 +16,6 @@ public class Main {
 	public static void main(String[] args) {
 		Query q = new Query();
 		new Main(q);
-		
 	}
 	
 	public Main(Query q) {
@@ -50,7 +49,7 @@ public class Main {
 	            	updateTransaction.update(q, employee);
 	                break;
 	            case 6:
-	                System.out.println("Thanks");
+	                System.out.println("Bye!!");
 	                System.exit(0);
 	                break;
 	            default:

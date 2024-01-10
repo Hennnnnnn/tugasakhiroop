@@ -14,7 +14,6 @@ public class LocalMenu implements menuTypes {
             if (rs.next()) {
                 System.out.printf("List %s menu: \n", employee.restoType);
                 while (rs.next()) {
-                    // Print menu details
                     System.out.printf("No: %s \n" +
                                     "Nama: %s \n" +
                                     "Harga : %s\n",
@@ -22,14 +21,12 @@ public class LocalMenu implements menuTypes {
                             rs.getString("foodname"),
                             rs.getString("price"));
 
-                    // Join to localmenu table
                     ResultSet menuRs = query.select("localmenu", "menuId = " + rs.getInt("menuId"));
                     while (menuRs.next()) {
                         System.out.printf("Description: %s\nOrigin: %s\n", menuRs.getString("Description"), menuRs.getString("origin"));
                     }
                     System.out.println("");
 
-                    // Save each menu number COUNT to its corresponding menu ID
                     saveId.put(count, rs.getInt("menuId"));
                     count++;
                 }

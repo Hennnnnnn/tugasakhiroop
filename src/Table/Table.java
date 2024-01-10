@@ -9,7 +9,7 @@ public class Table {
 
 	public boolean checkTable(Query query) {
 	    ResultSet rs = query.select("tableinfo", "typeofTabel = '" + this.tableType + "'");
-	    boolean error = false; // Set initial error state to true
+	    boolean error = true; // Set initial error state to true
 
 	    try {
 	        if (rs.next()) {
@@ -23,7 +23,7 @@ public class Table {
 	            System.out.println("Unknown table type");
 	        }
 	    } catch (SQLException e) {
-	        error = false;
+	        error = true;
 	        e.printStackTrace();
 	    }
 
